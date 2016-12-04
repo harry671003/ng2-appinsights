@@ -19,7 +19,7 @@ var config = {
     entry: path.join(__dirname, 'src', 'main.ts'),
     devtool: 'source-map',
     output: {
-        path: path.join(__dirname, 'lib'),
+        path: path.join(__dirname, 'bundles'),
         filename: outputFile,
         library: libraryName,
         libraryTarget: 'umd',

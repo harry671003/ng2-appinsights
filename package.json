@@ -2,7 +2,7 @@
   "name": "ng2-appinsights",
   "version": "0.1.0-alpha1",
   "description": "App Insights module for Angular 2.0.x",
-  "main": "index.js",
+  "main": "bundles/ng2-appinsights.min.js",
   "scripts": {
     "build": "node_modules/.bin/webpack -p",
     "dev": "node_modules/.bin/webpack --progress --colors --watch",
@@ -20,6 +20,9 @@
     "ng2-appinsights",
     "appinsights-ng2",
     "appinsights-angular2"
+  ],
+  "files": [
+    "bundles"
   ],
   "author": "Harry John",
   "license": "MIT",
