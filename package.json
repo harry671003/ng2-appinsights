@@ -5,8 +5,10 @@
   "main": "bundles/ng2-appinsights.min.js",
   "scripts": {
     "build": "node_modules/.bin/webpack -p",
-    "dev": "node_modules/.bin/webpack --progress --colors --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node_modules/.bin/webpack --progress --colors --watch",
+    "dev": "node_modules/.bin/webpack",
+    "test:e2e": "node e2e/index.js",
+    "prepublish": "npm run build && npm run dev"
   },
   "repository": {
     "type": "git",
@@ -41,6 +43,7 @@
   },
   "dependencies": {
     "@angular/core": "2.2.4",
+    "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
     "zone.js": "0.6.21"
   }

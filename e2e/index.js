@@ -1,0 +1,1 @@
+var appInsights = require('../bundles/ng2-appInsights');

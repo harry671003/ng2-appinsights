@@ -59,6 +59,7 @@ var config = {
     // Externals
     externals: {
         '@angular/core': '@angular/core',
+        'reflect-metadata': 'reflect-metadata',
     }
 };
 
