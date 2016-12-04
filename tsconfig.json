@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "outDir": "lib/",
+    "rootDir": "src/",
+    "sourceMap": true,
+    "removeComments": false
+  },
+  "types": [ "core.js" ],
+  "exclude": [
+    "node_modules",
+    "lib"
+  ],
+  "skipLibCheck": true
+}
