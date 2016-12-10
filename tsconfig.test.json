@@ -4,19 +4,15 @@
     "target": "es5",
     "noImplicitAny": true,
     "experimentalDecorators": true,
-    "rootDir": "src/",
+    "rootDir": "e2e/",
     "sourceMap": true,
     "removeComments": false,
-    "declaration": true,
-    "outDir": "../build/"
+    "declaration": true
   },
-  "types": [ "core.js" ],
+  "types": [ "core.js", "node", "jasmine" ],
   "exclude": [
     "node_modules",
-    "bundles",
-    "**/*.e2e-spec.ts",
-    "**/*.spec.ts",
-    "**/*.d.ts"
+    "bundles"
   ],
   "skipLibCheck": true
 }

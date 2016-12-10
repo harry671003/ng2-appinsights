@@ -9,21 +9,21 @@ var libraryName = PACKAGE.name,
 
 if (yargs.argv.p) {
     plugins.push(new webpack.optimize.UglifyJsPlugin({ minimize: true }));
-    outputFile = libraryName + '.min.js';
+    outputFile = path.join('lib', libraryName + '.min.js');
 } else {
-    outputFile = libraryName + '.js';
+    outputFile = path.join('lib', libraryName + '.js');
 }
 
 
 var config = {
-    entry: path.join(__dirname, 'src', 'main.ts'),
+    entry: path.join(__dirname, 'src', 'index.ts'),
     devtool: 'source-map',
     output: {
-        path: path.join(__dirname, 'bundles'),
+        path: path.join(__dirname, 'build'),
         filename: outputFile,
         library: libraryName,
         libraryTarget: 'umd',
-        umdNamedDefine: true
+        umdNamedDefine: false
     },
     module: {
         preLoaders: [
@@ -60,6 +60,7 @@ var config = {
     externals: {
         '@angular/core': '@angular/core',
         'reflect-metadata': 'reflect-metadata',
+        'applicationinsights-js': 'applicationinsights-js',
     }
 };
 
