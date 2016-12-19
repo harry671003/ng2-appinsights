@@ -1,12 +1,17 @@
 {
   "name": "ng2-appinsights",
-  "version": "0.1.0-alpha1",
+  "version": "0.2.0",
   "description": "App Insights module for Angular 2.0.x",
-  "main": "index.js",
+  "main": "bundles/ng2-appinsights.js",
   "scripts": {
-    "build": "node_modules/.bin/webpack -p",
-    "dev": "node_modules/.bin/webpack --progress --colors --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run webpack:dev && tsc",
+    "start": "node_modules/.bin/webpack --progress --colors --watch",
+    "webpack": "node_modules/.bin/webpack -p",
+    "webpack:dev": "node_modules/.bin/webpack",
+    "tsc": "tsc",
+    "test:stop": "karma stop",
+    "publish-to-npm": "npm run build && npm run webpack && npm publish build --ignore-scripts",
+    "localpack": "npm run build && cd build && npm pack --ignore-scripts"
   },
   "repository": {
     "type": "git",
@@ -21,6 +26,10 @@
     "appinsights-ng2",
     "appinsights-angular2"
   ],
+  "files": [
+    "**/*",
+    "!*.tgz"
+  ],
   "author": "Harry John",
   "license": "MIT",
   "bugs": {
@@ -29,16 +38,32 @@
   "homepage": "https://github.com/harry671003/ng2-appinsights#readme",
   "devDependencies": {
     "@types/core-js": "^0.9.35",
+    "@types/node": "0.0.2",
+    "clean-webpack-plugin": "^0.1.14",
+    "copy-webpack-plugin": "^4.0.1",
     "ts-loader": "^1.2.2",
     "tslint": "^4.0.2",
     "tslint-loader": "^3.2.1",
     "typescript": "^2.0.10",
     "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^1.16.2",
+    "@angular/core": "2.2.4",
+    "@angular/router": "3.3.4",
+    "@angular/common": "2.2.4",
+    "@angular/compiler": "2.2.4",
+    "@angular/platform-browser": "2.2.4",
+    "@angular/platform-browser-dynamic": "2.2.4",
+    "applicationinsights-js": "^1.0.4",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "5.0.0-beta.12",
+    "zone.js": "0.6.21",
+    "es6-shim": "0.35.2"
+  },
+  "peerDependencies": {
+    "@angular/core": "^2.2.0",
+    "@angular/router": "^3.3.0"
   },
   "dependencies": {
-    "@angular/core": "2.2.4",
-    "rxjs": "5.0.0-beta.12",
-    "zone.js": "0.6.21"
+    "applicationinsights-js": "^1.0.4"
   }
 }

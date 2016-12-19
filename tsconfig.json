@@ -2,17 +2,19 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
+    "moduleResolution": "node",
     "noImplicitAny": true,
     "experimentalDecorators": true,
-    "outDir": "lib/",
     "rootDir": "src/",
     "sourceMap": true,
-    "removeComments": false
+    "removeComments": false,
+    "declaration": true,
+    "outDir": "build/",
+    "emitDecoratorMetadata": true
   },
   "types": [ "core.js" ],
-  "exclude": [
-    "node_modules",
-    "lib"
+  "include": [
+    "src"
   ],
   "skipLibCheck": true
 }

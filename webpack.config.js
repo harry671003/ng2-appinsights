@@ -1,35 +1,57 @@
-var webpack = require('webpack');
-var PACKAGE = require('./package.json');
-var path = require('path');
-var yargs = require('yargs');
+const webpack = require("webpack");
+const PACKAGE = require("./package.json");
+const path = require("path");
+const yargs = require("yargs");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 
-var libraryName = PACKAGE.name,
-    plugins = [],
-    outputFile;
+const libraryName = PACKAGE.name;
+
+let plugins = [
+    new CopyWebpackPlugin([
+        {
+            from: "package.json"
+        },
+        {
+            from: "README.md"
+        },
+        {
+            from: "LICENSE"
+        },
+    ])
+];
 
 if (yargs.argv.p) {
     plugins.push(new webpack.optimize.UglifyJsPlugin({ minimize: true }));
-    outputFile = libraryName + '.min.js';
+    outputFile = path.join(libraryName + ".min.js");
 } else {
-    outputFile = libraryName + '.js';
+
+    // Clean only during dev build
+    plugins.push(
+        new CleanWebpackPlugin(["build"], {
+            verbose: true,
+            dry: false
+        })
+    );
+    outputFile = path.join(libraryName + ".js");
 }
 
 
 var config = {
-    entry: path.join(__dirname, 'src', 'main.ts'),
-    devtool: 'source-map',
+    entry: path.join(__dirname, "src", "index.ts"),
+    devtool: "source-map",
     output: {
-        path: path.join(__dirname, 'lib'),
-        filename: outputFile,
+        path: path.join(__dirname, "build"),
+        filename: "/bundles/" + outputFile,
         library: libraryName,
-        libraryTarget: 'umd',
-        umdNamedDefine: true
+        libraryTarget: "umd",
+        umdNamedDefine: false
     },
     module: {
         preLoaders: [
             {
                 test: /\.ts$/,
-                loader: 'tslint',
+                loader: "tslint",
                 include: /src/,
             },
         ],
@@ -37,7 +59,7 @@ var config = {
             {
                 test: /\.ts$/,
                 include: /src/,
-                loader: 'ts',
+                loader: "ts",
                 query: {
                     silent: true
                 }
@@ -45,8 +67,8 @@ var config = {
         ],
     },
     resolve: {
-        root: path.resolve('./src'),
-        extensions: ['', '.js', '.ts']
+        root: path.resolve("./src"),
+        extensions: ["", ".js", ".ts"]
     },
     plugins: plugins,
 
@@ -58,7 +80,15 @@ var config = {
 
     // Externals
     externals: {
-        '@angular/core': '@angular/core',
+        "@angular/core": "@angular/core",
+        "applicationinsights-js": "applicationinsights-js",
+    },
+
+    // TS loader
+    ts: {
+        compilerOptions: {
+            "declaration": false,   // We are emiting declarations seperately
+        }
     }
 };
 
