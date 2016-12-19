@@ -40,3 +40,6 @@ jspm_packages
 build
 # npm package
 *.tgz
+
+# TS output in e2e/app
+e2e/build
