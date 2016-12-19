@@ -1,34 +1,38 @@
-var webpack = require("webpack");
-var PACKAGE = require("./package.json");
-var path = require("path");
-var yargs = require("yargs");
-var CopyWebpackPlugin = require("copy-webpack-plugin");
-var CleanWebpackPlugin = require("clean-webpack-plugin");
+const webpack = require("webpack");
+const PACKAGE = require("./package.json");
+const path = require("path");
+const yargs = require("yargs");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 
-var libraryName = PACKAGE.name,
-    plugins = [
-        new CopyWebpackPlugin([
-            {
-                from: "package.json"
-            },
-            {
-                from: "README.md"
-            },
-            {
-                from: "LICENSE"
-            },
-        ]),
-        new CleanWebpackPlugin(["build"], {
-            verbose: true,
-            dry: false
-        })
-    ],
-    outputFile;
+const libraryName = PACKAGE.name;
+
+let plugins = [
+    new CopyWebpackPlugin([
+        {
+            from: "package.json"
+        },
+        {
+            from: "README.md"
+        },
+        {
+            from: "LICENSE"
+        },
+    ])
+];
 
 if (yargs.argv.p) {
     plugins.push(new webpack.optimize.UglifyJsPlugin({ minimize: true }));
     outputFile = path.join(libraryName + ".min.js");
 } else {
+
+    // Clean only during dev build
+    plugins.push(
+        new CleanWebpackPlugin(["build"], {
+            verbose: true,
+            dry: false
+        })
+    );
     outputFile = path.join(libraryName + ".js");
 }
 
