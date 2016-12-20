@@ -1,8 +1,24 @@
 <h1>App Insights Tests</h1>
+<hr>
 <button (click)="trackEvent()">Track Event</button>
 <button (click)="trackException()">Track Exception</button>
-<button (click)="trackPageVew()">Track Page View</button>
+<button (click)="trackPageView()">Track Page View</button>
 <button (click)="trackMetric()">Track Metric</button>
 <button (click)="trackDependency()">Track Dependency</button>
-<button (click)="trackTrace()">Track Trace</button>
+<button (click)="trackTrace()">Track Trace</button> <hr>
+<button (click)="setAuthenticatedUserContext()">Set Authenticated User Context</button>
+<button (click)="clearAuthenticatedUserContext()">Clear Authenticated User Context</button> <hr>
+<button (click)="startTrackPage()">Start Track Page</button>
+<button (click)="stopTrackPage()">Stop Track Page</button> <hr>
 <button (click)="flush()">Flush</button>
+
+<hr>
+<nav>
+<ul>
+    <li><a routerLink="/home">Home</a></li>
+    <li><a routerLink="/about">About</a></li>
+</ul>
+</nav>
+
+<hr>
+<router-outlet></router-outlet>

@@ -2,9 +2,9 @@
  * App Insights Configuration Contract
  * 
  * @export
- * @interface IConfig
+ * @interface Config
  */
-export interface IConfig {
+export interface Config {
     // The key of your Application Insights resource in Azure
     instrumentationKey: string;
 
@@ -29,7 +29,7 @@ export interface IConfig {
     enableDebug?: boolean;
 
     // If true, telemetry data is not collected or sent. Default false.
-    disableTelemetry?: boolean; 
+    disableTelemetry?: boolean;
 
     // Default false
     verboseLogging?: boolean;
@@ -81,4 +81,7 @@ export interface IConfig {
     // If true, the SDK will not store or read any data from local and session storage.
     // Default: false
     isStorageUseDisabled?: boolean;
+
+    // Index Signature
+    [index: string]: any;
 }

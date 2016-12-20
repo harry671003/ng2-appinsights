@@ -47,8 +47,7 @@
     "typescript": "^2.0.10",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2",
-    "@angular/core": "2.2.4",
-    "@angular/router": "3.3.4",
+    "@angular/core": "^2.0.0",
     "@angular/common": "2.2.4",
     "@angular/compiler": "2.2.4",
     "@angular/platform-browser": "2.2.4",
@@ -60,8 +59,7 @@
     "es6-shim": "0.35.2"
   },
   "peerDependencies": {
-    "@angular/core": "^2.2.0",
-    "@angular/router": "^3.3.0"
+    "@angular/core": "^2.2.0"
   },
   "dependencies": {
     "applicationinsights-js": "^1.0.4"

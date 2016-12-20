@@ -1,6 +1,8 @@
-import { NgModule, Inject } from '@angular/core';
+import { NgModule, Inject, ErrorHandler } from '@angular/core';
 import { AppInsights } from 'applicationinsights-js';
+
 import { AppInsightsService } from './appinsights.service';
+import { AppInsightsErrorHandler } from './errorhandler';
 
 /**
  * App Insights Module
@@ -15,6 +17,10 @@ import { AppInsightsService } from './appinsights.service';
             useValue: AppInsights,
         },
         AppInsightsService,
+        {
+            provide: ErrorHandler,
+            useClass: AppInsightsErrorHandler,
+        }
     ]
 })
 export class AppInsightsModule {}

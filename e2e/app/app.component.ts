@@ -1,14 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { Location } from '@angular/common';
 import { AppInsightsService, SeverityLevel } from 'ng2-appinsights';
+
+declare let Zone: any;
 
 @Component({
     selector: 'app',
     templateUrl: 'app/app.component.html'
 })
 export class AppComponent {
-    constructor(private appinsightsService: AppInsightsService) {
+    constructor(private appinsightsService: AppInsightsService, private location: Location) {
         this.appinsightsService.Init({
-            instrumentationKey: 'AIF-7cf4aea9-ffbe-4def-a58f-3dbec4de2ff6'
+            instrumentationKey: 'AIF-7cf4aea9-ffbe-4def-a58f-3dbec4de2ff6',
+            verboseLogging: true
         });
     }
 
@@ -70,6 +74,22 @@ export class AppComponent {
 
     trackPageView() {
         this.appinsightsService.trackPageView();
+    }
+
+    clearAuthenticatedUserContext() {
+        this.appinsightsService.clearAuthenticatedUserContext();
+    }
+
+    setAuthenticatedUserContext() {
+        this.appinsightsService.setAuthenticatedUserContext('harry671003', '123');
+    }
+
+    startTrackPage() {
+        this.appinsightsService.startTrackPage('PAGE_LOAD');
+    }
+
+    stopTrackPage() {
+        this.appinsightsService.stopTrackPage('PAGE_LOAD');
     }
 
     flush() {

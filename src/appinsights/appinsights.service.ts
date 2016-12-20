@@ -1,17 +1,24 @@
 import { Injectable, Inject } from '@angular/core';
 
-import { SeverityLevel, IConfig } from '../';
+import { SeverityLevel, Config } from '../';
 
 /**
  * App Insights Service
  */
 @Injectable()
 export class AppInsightsService {
-    constructor(@Inject('AppInsights') private appInsights: any) {
+    constructor(
+        @Inject('AppInsights') private appInsights: any
+    ) {}
 
-    }
-
-    Init(config: IConfig) {
+    /**
+     * Initialize app insights
+     * 
+     * @param {Config} config
+     * 
+     * @memberOf AppInsightsService
+     */
+    Init(config: Config) {
         this.appInsights.downloadAndSetup(config);
     }
 
@@ -135,7 +142,7 @@ export class AppInsightsService {
     }
 
     /**
-     * 
+     * Track dependency
      * 
      * @param {string} id - Unique id, this is used by the backend o correlate server requests.
      * @param {string} method - Represents request verb (GET, POST, etc.)
@@ -172,10 +179,83 @@ export class AppInsightsService {
     }
 
     /**
-     * Capture and log route changes automatically
+     * Set authenticated user context
+     * 
+     * @description
+     * Set the authenticated user id and the account id in this session. 
+     * Use this when you have identified a specific signed-in user.
+     * Parameters must not contain spaces or ,;=|
+     * 
+     * @param {string} authenticatedUserId - An id that uniquely identifies a user of your app.
+     * No spaces, comma, semicolon, equals or vertical bar.
+     * @param {string} [accountId] - An optional account id, if your app groups users into accounts.
+     * No spaces, comma, semicolon, equals or vertical bar.
+     * 
+     * @memberOf AppInsightsService
      */
-    private subscribeToRouteChanges() {
-        throw new Error('Not Implemented');
-        // TODO: Implement SubscribeToRouteChanges
+    setAuthenticatedUserContext(
+        authenticatedUserId: string,
+        accountId?: string
+    ): void {
+        this.appInsights.setAuthenticatedUserContext(authenticatedUserId, accountId);
+    }
+
+    /**
+     * Clear authenticated user context
+     * 
+     * @description
+     * Clears the authenticated user id and the account id from the user context, 
+     * and clears the associated cookie.
+     * 
+     * @memberOf AppInsightsService
+     */
+    clearAuthenticatedUserContext (): void {
+        this.appInsights.clearAuthenticatedUserContext();
+    }
+
+    /**
+     * Start Track Page
+     * 
+     * @description
+     * Starts the timer for tracking a page view. Use this instead of trackPageView 
+     * if you want to control when the page view timer starts and stops, but don't 
+     * want to calculate the duration yourself. This method doesn't send any telemetry. 
+     * Call stopTrackPage to log the end of the page view and send the event.
+     * 
+     * @param {string} [name] - The name used to identify the page in the portal. 
+     * Defaults to the document title.
+     * 
+     * @memberOf AppInsightsService
+     */
+    startTrackPage(name?: string) {
+        this.appInsights.startTrackPage(name);
+    }
+
+    /**
+     * Stop Track Page
+     * 
+     * @description
+     * Stops the timer that was started by calling startTrackPage and sends the page view 
+     * telemetry with the specified properties and measurements. The duration of the page 
+     * view will be the time between calling startTrackPage and stopTrackPage.
+     * 
+     * @param {string} [name] - The name used to identify the page in the portal. 
+     * Defaults to the document title.
+     * @param {string} [url] - A relative or absolute URL that identifies the page or similar item. 
+     * Defaults to the window location.
+     * @param {Object} [properties] - Map of string to string: Additional data used 
+     * to filter pages in the portal. Defaults to empty.
+     * @param {Object} [measurements] - Map of string to number: Metrics associated with this page, 
+     * displayed in Metrics Explorer on the portal. Defaults to empty.
+     * 
+     * @memberOf AppInsightsService
+     */
+    stopTrackPage(
+        name?: string,
+        url?: string,
+        properties?: Object,
+        measurements?: Object
+    ): void {
+        this.appInsights.stopTrackPage(name, url, properties, measurements);
     }
 }
