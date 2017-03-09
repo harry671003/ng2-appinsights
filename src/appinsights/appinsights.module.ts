@@ -6,7 +6,7 @@ import { AppInsightsErrorHandler } from './errorhandler';
 
 /**
  * App Insights Module
- * 
+ *
  * @export
  * @class AppInsightsModule
  */

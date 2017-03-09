@@ -1,6 +1,6 @@
 /**
  * Severity Level Constants
- * 
+ *
  * @export
  * @enum {number}
  */

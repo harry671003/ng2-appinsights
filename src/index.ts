@@ -1,7 +1,7 @@
 declare namespace AppInsights {}
 
-export * from './appinsights/errorhandler';
-export * from './appinsights/appinsights.module';
-export * from './appinsights/appinsights.service';
-export * from './appinsights/severitylevel';
-export * from './appinsights/config.interface';
+export { AppInsightsErrorHandler } from './appinsights/errorhandler';
+export { AppInsightsModule } from './appinsights/appinsights.module';
+export { AppInsightsService } from './appinsights/appinsights.service';
+export { SeverityLevel } from './appinsights/severitylevel';
+export { Config } from './appinsights/config.interface';

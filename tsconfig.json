@@ -1,20 +1,24 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "moduleResolution": "node",
-    "noImplicitAny": true,
-    "experimentalDecorators": true,
-    "rootDir": "src/",
-    "sourceMap": true,
-    "removeComments": false,
     "declaration": true,
-    "outDir": "build/",
-    "emitDecoratorMetadata": true
+    "stripInternal": true,
+    "experimentalDecorators": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "rootDir": "./src",
+    "outDir": "./build",
+    "sourceMap": true,
+    "inlineSources": true,
+    "target": "es5",
+    "skipLibCheck": true
   },
-  "types": [ "core.js" ],
-  "include": [
-    "src"
+  "files": [
+    "src/index.ts"
   ],
-  "skipLibCheck": true
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true,
+    "genDir": "./build"
+  }
 }
