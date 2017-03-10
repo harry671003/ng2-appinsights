@@ -1,6 +1,6 @@
 {
   "name": "ng2-appinsights",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "App Insights module for Angular 2.0.x",
   "main": "bundles/ng2-appinsights.js",
   "module": "index.js",
