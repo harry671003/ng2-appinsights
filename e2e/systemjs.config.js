@@ -21,7 +21,7 @@
       "@angular/platform-browser-dynamic": "npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js",
       // other libraries
       "rxjs":                       "npm:rxjs",
-      "ng2-appinsights": "npm:ng2-appinsights/bundles/ng2-appinsights.js",
+      "ng2-appinsights": "npm:ng2-appinsights",
       "applicationinsights-js": "npm:applicationinsights-js",
       "reflect-metadata": "npm:reflect-metadata"
     },
@@ -34,9 +34,9 @@
       rxjs: {
         defaultExtension: "js"
       },
-      "applicationinsights-js": {
-        defaultExtension: "js",
-        main: "JavaScript/JavaScriptSDK.Module/AppInsightsModule.js"
+      "ng2-appinsights": {
+        main: "index.js",
+        defaultExtension: "js"
       }
     }
   });

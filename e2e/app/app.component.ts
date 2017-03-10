@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { AppInsightsService, SeverityLevel } from 'ng2-appinsights';
+import { Observable } from 'rxjs/observable';
 
 declare let Zone: any;
 
@@ -9,9 +10,12 @@ declare let Zone: any;
     templateUrl: 'app/app.component.html'
 })
 export class AppComponent {
+
+    private value: string;
+
     constructor(private appinsightsService: AppInsightsService, private location: Location) {
         this.appinsightsService.Init({
-            instrumentationKey: 'AIF-7cf4aea9-ffbe-4def-a58f-3dbec4de2ff6',
+            instrumentationKey: 'AIF-2139c09a-72ff-48d2-a32b-bee7b807695c',
             verboseLogging: true
         });
     }
@@ -37,7 +41,7 @@ export class AppComponent {
     trackTrace() {
         this.appinsightsService.trackTrace(
             'SampleEvent',
-            { sampleProp: 'sampleProp' },
+            { SeverityLevel: 0 },
             { sampleMeasurement: 1 }
         );
     }
@@ -94,5 +98,9 @@ export class AppComponent {
 
     flush() {
         this.appinsightsService.flush();
+    }
+
+    throwUnhandledError() {
+        throw new Error('Unhandled Error');
     }
 }

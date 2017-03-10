@@ -44,7 +44,7 @@ import { AppInsightsService } from 'ng2-appinsights';
 export class AppComponent {
     constructor(private appinsightsService: AppInsightsService) {
         this.appinsightsService.Init({
-            instrumentationKey: 'INSTRUMENTATION_KEY'
+            instrumentationKey: '<INSTRUMENTATION_KEY>'
         });
     }
 }
@@ -56,7 +56,7 @@ To configure the service pass a configuration object in the Init method
 
 ```ts
 this.appinsightsService.Init({
-    instrumentationKey: 'INSTRUMENTATION_KEY', // Required field
+    instrumentationKey: '<INSTRUMENTATION_KEY>', // Required field
     enableDebug: false,
     maxAjaxCallsPerView: 50,
     disableTelemetry: true

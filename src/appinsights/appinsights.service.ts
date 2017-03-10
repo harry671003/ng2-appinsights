@@ -1,4 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
+import { AppInsightsLibraryService } from '../lib/appinsightslibrary.service'
 
 import { SeverityLevel, Config } from '../';
 
@@ -8,14 +9,18 @@ import { SeverityLevel, Config } from '../';
 @Injectable()
 export class AppInsightsService {
     constructor(
-        @Inject('AppInsights') private appInsights: any
-    ) {}
+        @Inject(AppInsightsLibraryService) appInsightsLibraryService: AppInsightsLibraryService
+    ) {
+        this.appInsights = appInsightsLibraryService.getAppInsightsInstance();
+    }
+
+    private appInsights: any;
 
     /**
      * Initialize app insights
-     * 
+     *
      * @param {Config} config
-     * 
+     *
      * @memberOf AppInsightsService
      */
     Init(config: Config) {
@@ -24,20 +29,20 @@ export class AppInsightsService {
 
     /**
      * Track Page View
-     * 
-     * @param {string} [name] - The name used to identify the page in the portal. 
+     *
+     * @param {string} [name] - The name used to identify the page in the portal.
      * Defaults to the document title.
      * @param {string} [url] - A relative or absolute URL that identifies the
      * page or similar item. Defaults to the window location.
-     * @param {*} [properties] - Map of string to string: Additional data 
+     * @param {*} [properties] - Map of string to string: Additional data
      * used to filter pages in the portal. Defaults to empty.
-     * @param {*} [measurements] - Map of string to number: Metrics associated 
+     * @param {*} [measurements] - Map of string to number: Metrics associated
      * with this page, displayed in Metrics Explorer on the portal.
      * Defaults to empty.
-     * @param {number} [duration] - The number of milliseconds it took to load 
+     * @param {number} [duration] - The number of milliseconds it took to load
      * this page, displayed in Metrics Explorer on the portal. Defaults to empty.
      * If empty, end of page view duration is recorded when browser page load event is called.
-     * 
+     *
      * @memberOf AppInsightsService
      */
     trackPageView(
@@ -52,14 +57,14 @@ export class AppInsightsService {
 
     /**
      * Track Event
-     * 
+     *
      * @param {string} name - Identifies the event. Events with the same name are
      * counted and can be charted in Metric Explorer.
      * @param {*} [properties] - Map of string to string: Additional data used to
      * filter events in the portal. Defaults to empty.
-     * @param {*} [measurements] - Map of string to number: Metrics associated with 
+     * @param {*} [measurements] - Map of string to number: Metrics associated with
      * this page, displayed in Metrics Explorer on the portal. Defaults to empty.
-     * 
+     *
      * @memberOf AppInsightsService
      */
     trackEvent(
@@ -72,20 +77,20 @@ export class AppInsightsService {
 
     /**
      * Track Metric
-     * 
+     *
      * @param {string} name - A string that identifies the metric. In the portal,
      * you can select metrics for display by name.
-     * @param {number} average - Either a single measurement, or the average of 
+     * @param {number} average - Either a single measurement, or the average of
      * several measurements. Should be >=0 to be correctly displayed.
-     * @param {number} [sampleCount] - Count of measurements represented by the 
+     * @param {number} [sampleCount] - Count of measurements represented by the
      * average. Defaults to 1. Should be >=1.
-     * @param {number} [min] - The smallest measurement in the sample. Defaults 
+     * @param {number} [min] - The smallest measurement in the sample. Defaults
      * to the average. Should be >= 0.
-     * @param {number} [max] - The largest measurement in the sample. Defaults to 
+     * @param {number} [max] - The largest measurement in the sample. Defaults to
      * the average. Should be >= 0.
-     * @param {*} [properties] - Map of string to string: Additional data used to 
+     * @param {*} [properties] - Map of string to string: Additional data used to
      * filter events in the portal.
-     * 
+     *
      * @memberOf AppInsightsService
      */
     trackMetric(
@@ -101,15 +106,15 @@ export class AppInsightsService {
 
     /**
      * Track Exception
-     * 
+     *
      * @param {Error} exception - An Error from a catch clause.
      * @param {string} [handledAt] - Defaults to "unhandled".
-     * @param {*} [properties] - Map of string to string: Additional data used to 
+     * @param {*} [properties] - Map of string to string: Additional data used to
      * filter exceptions in the portal. Defaults to empty.
-     * @param {*} [measurements] - Map of string to number: Metrics associated 
+     * @param {*} [measurements] - Map of string to number: Metrics associated
      * with this page, displayed in Metrics Explorer on the portal. Defaults to empty.
      * @param {SeverityLevel} [severityLevel] - SeverityLevel
-     * 
+     *
      * @memberOf AppInsightsService
      */
     trackException(
@@ -124,13 +129,13 @@ export class AppInsightsService {
 
     /**
      * Track Trace
-     * 
+     *
      * @param {string} message - Diagnostic data. Can be much longer than a name.
-     * @param {*} [properties] - Map of string to string: Additional data used to 
+     * @param {*} [properties] - Map of string to string: Additional data used to
      * filter exceptions in the portal. Defaults to empty.
      * @param {*} [measurements] - Map of string to number: Metrics associated with this page,
      * displayed in Metrics Explorer on the portal. Defaults to empty.
-     * 
+     *
      * @memberOf AppInsightsService
      */
     trackTrace(
@@ -143,7 +148,7 @@ export class AppInsightsService {
 
     /**
      * Track dependency
-     * 
+     *
      * @param {string} id - Unique id, this is used by the backend o correlate server requests.
      * @param {string} method - Represents request verb (GET, POST, etc.)
      * @param {string} absoluteUrl - Absolute url used to make the dependency request
@@ -151,7 +156,7 @@ export class AppInsightsService {
      * @param {number} totalTime - Total request time
      * @param {boolean} success - Indicates if the request was sessessful
      * @param {number} resultCode - Response code returned by the dependency request
-     * 
+     *
      * @memberOf AppInsightsService
      */
     trackDependency(
@@ -168,10 +173,10 @@ export class AppInsightsService {
 
     /**
      * Flush
-     * 
+     *
      * @description
      * Immediately send all queued telemetry. Synchronous.
-     * 
+     *
      * @memberOf AppInsightsService
      */
     flush() {
@@ -180,17 +185,17 @@ export class AppInsightsService {
 
     /**
      * Set authenticated user context
-     * 
+     *
      * @description
-     * Set the authenticated user id and the account id in this session. 
+     * Set the authenticated user id and the account id in this session.
      * Use this when you have identified a specific signed-in user.
      * Parameters must not contain spaces or ,;=|
-     * 
+     *
      * @param {string} authenticatedUserId - An id that uniquely identifies a user of your app.
      * No spaces, comma, semicolon, equals or vertical bar.
      * @param {string} [accountId] - An optional account id, if your app groups users into accounts.
      * No spaces, comma, semicolon, equals or vertical bar.
-     * 
+     *
      * @memberOf AppInsightsService
      */
     setAuthenticatedUserContext(
@@ -202,11 +207,11 @@ export class AppInsightsService {
 
     /**
      * Clear authenticated user context
-     * 
+     *
      * @description
-     * Clears the authenticated user id and the account id from the user context, 
+     * Clears the authenticated user id and the account id from the user context,
      * and clears the associated cookie.
-     * 
+     *
      * @memberOf AppInsightsService
      */
     clearAuthenticatedUserContext (): void {
@@ -215,16 +220,16 @@ export class AppInsightsService {
 
     /**
      * Start Track Page
-     * 
+     *
      * @description
-     * Starts the timer for tracking a page view. Use this instead of trackPageView 
-     * if you want to control when the page view timer starts and stops, but don't 
-     * want to calculate the duration yourself. This method doesn't send any telemetry. 
+     * Starts the timer for tracking a page view. Use this instead of trackPageView
+     * if you want to control when the page view timer starts and stops, but don't
+     * want to calculate the duration yourself. This method doesn't send any telemetry.
      * Call stopTrackPage to log the end of the page view and send the event.
-     * 
-     * @param {string} [name] - The name used to identify the page in the portal. 
+     *
+     * @param {string} [name] - The name used to identify the page in the portal.
      * Defaults to the document title.
-     * 
+     *
      * @memberOf AppInsightsService
      */
     startTrackPage(name?: string) {
@@ -233,21 +238,21 @@ export class AppInsightsService {
 
     /**
      * Stop Track Page
-     * 
+     *
      * @description
-     * Stops the timer that was started by calling startTrackPage and sends the page view 
-     * telemetry with the specified properties and measurements. The duration of the page 
+     * Stops the timer that was started by calling startTrackPage and sends the page view
+     * telemetry with the specified properties and measurements. The duration of the page
      * view will be the time between calling startTrackPage and stopTrackPage.
-     * 
-     * @param {string} [name] - The name used to identify the page in the portal. 
+     *
+     * @param {string} [name] - The name used to identify the page in the portal.
      * Defaults to the document title.
-     * @param {string} [url] - A relative or absolute URL that identifies the page or similar item. 
+     * @param {string} [url] - A relative or absolute URL that identifies the page or similar item.
      * Defaults to the window location.
-     * @param {Object} [properties] - Map of string to string: Additional data used 
+     * @param {Object} [properties] - Map of string to string: Additional data used
      * to filter pages in the portal. Defaults to empty.
-     * @param {Object} [measurements] - Map of string to number: Metrics associated with this page, 
+     * @param {Object} [measurements] - Map of string to number: Metrics associated with this page,
      * displayed in Metrics Explorer on the portal. Defaults to empty.
-     * 
+     *
      * @memberOf AppInsightsService
      */
     stopTrackPage(
