@@ -1,5 +1,5 @@
 import { NgModule, Inject, ErrorHandler } from '@angular/core';
-import { AppInsights } from 'applicationinsights-js';
+import { AppInsightsLibraryService } from '../lib/appinsightslibrary.service';
 
 import { AppInsightsService } from './appinsights.service';
 import { AppInsightsErrorHandler } from './errorhandler';
@@ -12,10 +12,7 @@ import { AppInsightsErrorHandler } from './errorhandler';
  */
 @NgModule({
     providers: [
-        {
-            provide: 'AppInsights',
-            useValue: AppInsights,
-        },
+        AppInsightsLibraryService,
         AppInsightsService,
         {
             provide: ErrorHandler,

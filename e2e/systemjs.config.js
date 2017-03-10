@@ -34,10 +34,6 @@
       rxjs: {
         defaultExtension: "js"
       },
-      "applicationinsights-js": {
-        defaultExtension: "js",
-        main: "JavaScript/JavaScriptSDK.Module/AppInsightsModule.js"
-      },
       "ng2-appinsights": {
         main: "index.js",
         defaultExtension: "js"

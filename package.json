@@ -64,9 +64,5 @@
   },
   "peerDependencies": {
     "@angular/core": "^2.4.0"
-  },
-  "dependencies": {
-    "@types/applicationinsights-js": "^1.0.0",
-    "applicationinsights-js": "^1.0.4"
   }
 }

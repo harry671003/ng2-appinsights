@@ -3,6 +3,7 @@
     "declaration": true,
     "stripInternal": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
     "module": "commonjs",
@@ -19,6 +20,7 @@
   ],
   "angularCompilerOptions": {
     "strictMetadataEmit": true,
-    "genDir": "./build"
+    "genDir": "./build",
+    "emitDecoratorMetadata": true
   }
 }

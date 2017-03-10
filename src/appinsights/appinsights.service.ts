@@ -1,4 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
+import { AppInsightsLibraryService } from '../lib/appinsightslibrary.service'
 
 import { SeverityLevel, Config } from '../';
 
@@ -8,8 +9,12 @@ import { SeverityLevel, Config } from '../';
 @Injectable()
 export class AppInsightsService {
     constructor(
-        @Inject('AppInsights') private appInsights: any
-    ) {}
+        @Inject(AppInsightsLibraryService) appInsightsLibraryService: AppInsightsLibraryService
+    ) {
+        this.appInsights = appInsightsLibraryService.getAppInsightsInstance();
+    }
+
+    private appInsights: any;
 
     /**
      * Initialize app insights

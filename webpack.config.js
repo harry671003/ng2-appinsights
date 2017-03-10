@@ -81,7 +81,6 @@ var config = {
     // Externals
     externals: {
         "@angular/core": "@angular/core",
-        "applicationinsights-js": "applicationinsights-js",
     },
 
     // TS loader
