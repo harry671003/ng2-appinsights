@@ -1,6 +1,6 @@
 {
   "name": "ng2-appinsights",
-  "version": "0.5.0",
+  "version": "1.0.0-beta.1",
   "description": "App Insights module for Angular 2.0.x",
   "main": "bundles/ng2-appinsights.js",
   "module": "index.js",
@@ -63,6 +63,6 @@
     "zone.js": "0.7.2"
   },
   "peerDependencies": {
-    "@angular/core": "^2.4.0"
+    "@angular/core": ">=2.0.0 <5.0.0"
   }
 }
